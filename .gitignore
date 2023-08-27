@@ -8,4 +8,7 @@
 /var/
 /vendor/
 /github-pdezwart-php-amqp
+/.idea/
+/composer.lock
+/symfony.lock
 ###< symfony/framework-bundle ###
