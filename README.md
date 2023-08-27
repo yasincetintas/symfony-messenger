@@ -50,4 +50,5 @@ Bu proje bir örnek amacıyla oluşturulmuştur. Gerçek bir uygulama geliştiri
 
 Herhangi bir soru veya geri bildiriminiz varsa, lütfen [ysnctnts@gmail.com](mailto:ysnctnts@gmail.com) adresine e-posta göndermekten çekinmeyin.
 Etkinlik adresi: https://phpkonf.org/
+
 Sunum İçeriği: https://docs.google.com/presentation/d/1mq3kE7GQNqAHAIZUtk1JVRgjqxyDu33zeCNFuCw41oE/edit?usp=sharing
