@@ -10,6 +10,8 @@ Bu proje, Symfony 6.3 ve PHP 8.1 kullanılarak geliştirilmiştir.
 - Symfony Messenger Component
 - Docker
 - RabbitMQ
+- Redis
+- Postgresql
 
 ## Başlamadan Önce
 
