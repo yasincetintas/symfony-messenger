@@ -1,0 +1,66 @@
+framework:
+    messenger:
+
+        default_bus: first.bus
+
+        buses:
+            first.bus:
+                middleware:
+                    - doctrine_ping_connection
+                    - doctrine_close_connection
+                    - App\Messenger\Middlewares\FirstBusMiddleware
+
+            second.bus:
+                middleware:
+                    - doctrine_ping_connection
+                    - doctrine_close_connection
+                    - App\Messenger\Middlewares\SecondBusMiddleware
+
+        failure_transport: failed
+
+        transports:
+
+            async_bus:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                retry_strategy:
+                    max_retries: '%env(int:MESSENGER_MAX_RETRIES)%'
+                    delay: '%env(int:MESSENGER_DELAY)%'
+                    multiplier: 1
+                    max_delay: '%env(int:MESSENGER_MAX_DELAY)%'
+                options:
+                    vhost: '%env(MESSENGER_TRANSPORT_VHOST)%'
+                    exchange:
+                        name: messages
+                        type: direct
+                        default_publish_routing_key: bus
+                    queues:
+                        bus:
+                            binding_keys: [ bus ]
+
+            async_rabbit:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                serializer: messenger.transport.symfony_serializer
+                retry_strategy:
+                    max_retries: '%env(int:MESSENGER_MAX_RETRIES)%'
+                    delay: '%env(int:MESSENGER_DELAY)%'
+                    multiplier: 1
+                    max_delay: '%env(int:MESSENGER_MAX_DELAY)%'
+                options:
+                    vhost: '%env(MESSENGER_TRANSPORT_VHOST)%'
+                    exchange:
+                        name: messages
+                        type: direct
+                        default_publish_routing_key: rabbit
+                    queues:
+                        rabbit:
+                            binding_keys: [ rabbit ]
+
+            async_redis: '%env(REDIS_MESSENGER_TRANSPORT_DSN)%'
+
+            failed: 'doctrine://default?queue_name=queue_failed'
+
+        routing:
+             'App\Messenger\Messages\FirstBusMessage': async_bus
+             'App\Messenger\Messages\SecondBusMessage': async_bus
+             'App\Messenger\Messages\RedisMessage': async_redis
+             'App\Messenger\Messages\RabbitMessage': async_rabbit

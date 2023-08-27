@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Record List</h1>
+
+    <form method="post" action="{{ path('record_new') }}">
+        <label for="value">Value:</label>
+        <input type="text" id="value" name="value">
+        <select id="queue" name="queue">
+            <option value="first-bus" selected>Default Bus (First)</option>
+            <option value="second-bus">Second Bus</option>
+            <option value="redis">Transport Redis</option>
+            <option value="rabbit">Transport Rabbit</option>
+        </select>
+        <button type="submit">Add Record</button>
+    </form>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Value</th>
+            <th>Queue</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for record in records %}
+            <tr>
+                <td>{{ record.id }}</td>
+                <td>{{ record.value }}</td>
+                <td>{{ record.queue }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
