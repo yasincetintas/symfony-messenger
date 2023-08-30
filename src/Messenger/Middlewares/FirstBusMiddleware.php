@@ -25,7 +25,7 @@ class FirstBusMiddleware implements MiddlewareInterface
 //            if ($stamp[0] instanceof ChangeBodyStamp){
 //                $message = $envelope->getMessage();
 //                $oldMessage = $message->getValue();
-//                $message->setValue($oldMessage." stamp data: ".$stamp[0]->getAddText());
+//                $message->setValue($oldMessage." [[ stamp data: ".$stamp[0]->getAddText()."]] ");
 //            }
 //        }
         return $stack->next()->handle($envelope, $stack);

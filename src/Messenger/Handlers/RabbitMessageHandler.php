@@ -11,7 +11,7 @@ class RabbitMessageHandler extends AbstractHandler
 {
     public function __invoke(RabbitMessage $message): bool
     {
-        throw new \Exception("Test");
+//        throw new \Exception("Test");
         $record = new Record();
         $record->setValue($message->getValue());
         $record->setQueue($message->getQueue());

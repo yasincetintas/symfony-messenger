@@ -12,8 +12,6 @@ framework:
 
             second.bus:
                 middleware:
-                    - doctrine_ping_connection
-                    - doctrine_close_connection
                     - App\Messenger\Middlewares\SecondBusMiddleware
 
         failure_transport: failed
@@ -55,7 +53,13 @@ framework:
                         rabbit:
                             binding_keys: [ rabbit ]
 
-            async_redis: '%env(REDIS_MESSENGER_TRANSPORT_DSN)%'
+            async_redis:
+                dsn: '%env(REDIS_MESSENGER_TRANSPORT_DSN)%'
+                retry_strategy:
+                    max_retries: '%env(int:MESSENGER_MAX_RETRIES)%'
+                    delay: '%env(int:MESSENGER_DELAY)%'
+                    multiplier: 1
+                    max_delay: '%env(int:MESSENGER_MAX_DELAY)%'
 
             failed: 'doctrine://default?queue_name=queue_failed'
 
