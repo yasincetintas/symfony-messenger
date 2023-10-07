@@ -23,14 +23,14 @@ git clone https://github.com/yasincetintas/symfony-messenger.git
 cd symfony-messenger
 ```
 
-2. Gerekli bağımlılıkları yüklemek için:
-```
-composer install
-```
-
-3. Docker konteynerlarını başlatmak için:
+2. Docker konteynerlarını başlatmak için:
 ```
 docker-compose up -d
+```
+
+3. Gerekli bağımlılıkları yüklemek için:
+```
+docker exec -it symfony-app bash -c "composer install"
 ```
 
 4. Veritabanını oluşturmak için:
